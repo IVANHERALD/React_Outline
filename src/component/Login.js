@@ -9,7 +9,8 @@ function Login() {
   let history = useNavigate();
 
 const handleClick=()=>{
-  history("/Register");
+  let path='./Register.js';
+  history(path);
 }
   return (
     <div className="app">
@@ -33,6 +34,10 @@ const handleClick=()=>{
         <Button variant="contained">Login</Button> &nbsp;&nbsp;&nbsp;
         <Button variant="contained" onClick={handleClick}>Sign up</Button>
         </div>
+
+
+
+        <br/>
         <div className="Input-container-image">
         <img src={login_image} height={300}/>
         </div>
