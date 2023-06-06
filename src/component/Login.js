@@ -6,11 +6,10 @@ import login_image from '../Images/loginImage.jpg';
 import "./style.css";
 
 function Login() {
-  let navigate = useNavigate();
+  let history = useNavigate();
 
 const handleClick=()=>{
-  let path='./Register.js';
-  navigate(path);
+  history("/Register");
 }
   return (
     <div className="app">

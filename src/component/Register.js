@@ -1,8 +1,13 @@
 import React from 'react'
 import {TextField,Button} from '@mui/material';
 import login_image from '../Images/loginImage.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+    const history =useNavigate();
+    const Loginpage=()=>{
+        history("/");
+    }
   return (
     <div className="app">
       <div className="Input-container-main">
@@ -29,7 +34,7 @@ function Register() {
           autoComplete="current-password"
         /><br/><br/><br/>
         <Button variant="contained">Register</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="contained">Sign in</Button>
+        <Button variant="contained" onClick={Loginpage}>Sign in</Button>
         
         </div>
         <div className="Input-container-image">
