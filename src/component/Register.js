@@ -1,7 +1,9 @@
+
 import React from 'react'
 import {TextField,Button} from '@mui/material';
 import login_image from '../Images/loginImage.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+
 import {useState} from 'react'
 import {auth} from './Firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
@@ -14,16 +16,23 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
 
-
-
-    const Loginpage=()=>{
-        history("/");
+  const validatePassword = () => {
+    let isValid = true
+    if (password !== '' && confirmPassword !== ''){
+      if (password !== confirmPassword) {
+        isValid = false
+        setError('Passwords does not match')
+      }
     }
+    return isValid
+  }
+
 
     const register = e => {
       e.preventDefault()
       setError('')
-      if(true) {
+      if(validatePassword()) {
+        console.log('ready')
         // Create a new user with email and password using firebase
           createUserWithEmailAndPassword(auth,email, password)
           .then((res) => {
@@ -34,8 +43,10 @@ function Register() {
       setName('')
       setEmail('')
       setPassword('')
-      
+      setConfirmPassword('')
     }
+
+    
 
 
   return (
@@ -43,34 +54,20 @@ function Register() {
       <div className="Input-container-main">
         <div className="Input-container-register">
             <h3 className='Title'> Create a new account </h3>
-          <TextField
-          id="outlined"
-          label="Name"
-          value={name}
-        />
-        
-        <br/><br/><br/>
+          <TextField id="outlined" label="Name" value={name} onChange={(e)=>setName(e.target.value)}/><br/><br/><br/>
+          <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/> <br/><br/><br/>
+          <TextField label="Password" autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br/><br/><br/>
+          <TextField label="Confirm Password" type="password" autoComplete="current-password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/><br/><br/><br/>
+          <Button variant="contained" onClick={register}>Register</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <br/><br/>
+          <span>
+          Already have an account?  
+          <Link to='/'>login</Link>
+        </span>
+          </div>
 
-        <TextField
-          id="outlined"
-          label="Email address"
-          defaultValue="email@gmail.com"
-          value={email}
-        />
-        
-        <br/><br/><br/>
-
-          <TextField label="Password"
-          type="password"
-          autoComplete="current-password"
-          value={password}
-        /><br/><br/><br/>
-        <Button variant="contained">Register</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="contained" onClick={Loginpage}>Sign in</Button>
-        
-        </div>
         <div className="Input-container-image">
-        <img src={login_image} height={300}/>
+        <img src={login_image} height={300} alt="register_image"/>
         </div>
       </div>
 
