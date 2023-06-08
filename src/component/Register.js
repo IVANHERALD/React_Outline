@@ -3,10 +3,11 @@ import React from 'react'
 import {TextField,Button} from '@mui/material';
 import login_image from '../Images/loginImage.jpg';
 import { useNavigate,Link } from 'react-router-dom';
+import {useAuthValue} from '../AuthContext'
 
 import {useState} from 'react'
 import {auth} from './Firebase'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {createUserWithEmailAndPassword,sendEmailVerification} from 'firebase/auth'
 
 function Register() {
   const history =useNavigate();
@@ -16,6 +17,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
 
+  const{setTimeActive}=useAuthValue();
   const validatePassword = () => {
     let isValid = true
     if (password !== '' && confirmPassword !== ''){
@@ -37,6 +39,12 @@ function Register() {
           createUserWithEmailAndPassword(auth,email, password)
           .then((res) => {
               console.log(res.user)
+              sendEmailVerification(auth.currentUser)
+  .then(() => {
+    setTimeActive(true)
+    history('/Verify-email')
+  }).catch((err) => alert(err.message))
+
             })
           .catch(err => setError(err.message))
       }
