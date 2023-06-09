@@ -44,9 +44,11 @@ const login = e => {
       <div className="Input-container-main">
         <div className="Input-container-login">
           <h2>Login</h2>
-          <GoogleLogin></GoogleLogin>
-          <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/>       <br/><br/><br/>
-          <TextField label="Password"type="password"autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/>     <br/><span><Link to='/'>Forgot password?</Link></span><br/><br/>
+        <center>
+          <GoogleLogin  width="100" ></GoogleLogin></center><br/><br/>
+          <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/>       <br/><br/>
+          <TextField label="Password"type="password"autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/>    <br/> <br/>
+          <span><Link to='/'>Forgot password?</Link></span><br/><br/>
           <Button variant="contained" onClick={login}>Login</Button> &nbsp;&nbsp;&nbsp;
           <Button variant="contained" onClick={handleClick}>Sign up</Button>
         </div>   

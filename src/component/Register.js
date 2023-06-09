@@ -58,21 +58,21 @@ function Register() {
     <div className="app">
       <div className="Input-container-main">
         <div className="Input-container-register">
-            <h3 className='Title'> Create a new account </h3>
-          <TextField id="outlined" label="Name" value={name} onChange={(e)=>setName(e.target.value)}/><br/><br/><br/>
-          <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/> <br/><br/><br/>
-          <TextField label="Password" autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br/><br/><br/>
-          <TextField label="Confirm Password" type="password" autoComplete="current-password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/><br/><br/><br/>
+            <h2 className='Title'> Create a new account </h2>
+          <TextField id="outlined" label="Name" value={name} onChange={(e)=>setName(e.target.value)}/><br/><br/>
+          <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/> <br/><br/>
+          <TextField label="Password" autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br/><br/>
+          <TextField label="Confirm Password" type="password" autoComplete="current-password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/><br/><br/>
           <Button variant="contained" onClick={register}>Register</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <br/><br/>
           <span>
-          Already have an account?  
+          Already have an account? &nbsp; 
           <Link to='/'>login</Link>
         </span>
           </div>
 
         <div className="Input-container-image">
-        <img src={login_image}  alt="register_image"/>
+        <img src={login_image}  className='image'alt="register_image"/>
         </div>
       </div>
 
