@@ -72,7 +72,7 @@ function Register() {
           </div>
 
         <div className="Input-container-image">
-        <img src={login_image} height={300} alt="register_image"/>
+        <img src={login_image}  alt="register_image"/>
         </div>
       </div>
 

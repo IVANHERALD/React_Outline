@@ -20,7 +20,7 @@ function VerifyEmail() {
           .then(() => {
             if(currentUser?.emailVerified){
               clearInterval(interval)
-              history('/Profile')
+              history('/')
             }
           })
           .catch((err) => {
