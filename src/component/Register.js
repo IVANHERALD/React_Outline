@@ -3,10 +3,10 @@ import React from 'react'
 import {TextField,Button} from '@mui/material';
 import login_image from '../Images/loginImage.jpg';
 import { useNavigate,Link } from 'react-router-dom';
-
 import {useState} from 'react'
 import {auth} from './Firebase'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {createUserWithEmailAndPassword,sendEmailVerification }  from 'firebase/auth'
+import {useAuthValue} from '../AuthContext'
 
 function Register() {
   const history =useNavigate();
@@ -15,6 +15,7 @@ function Register() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+  const {setTimeActive} = useAuthValue()
 
   const validatePassword = () => {
     let isValid = true
@@ -22,6 +23,7 @@ function Register() {
       if (password !== confirmPassword) {
         isValid = false
         setError('Passwords does not match')
+        
       }
     }
     return isValid
@@ -32,12 +34,15 @@ function Register() {
       e.preventDefault()
       setError('')
       if(validatePassword()) {
-        console.log('ready')
         // Create a new user with email and password using firebase
           createUserWithEmailAndPassword(auth,email, password)
-          .then((res) => {
-              console.log(res.user)
-            })
+          .then(() => {
+            sendEmailVerification(auth.currentUser)
+            .then(() => {
+              history('/VerifyEmail')
+              setTimeActive(true)
+            }).catch((err) => alert(err.message))
+          })
           .catch(err => setError(err.message))
       }
       setName('')
