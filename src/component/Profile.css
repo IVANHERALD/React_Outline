@@ -1,0 +1,28 @@
+.Categories{
+    background-color: aqua;
+    display: flex;
+    gap: 15px;
+    width: auto;
+    height: 70px;
+}
+.Category-1{
+    border-radius: 35px;
+    background-color: rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+
+}
+.Category-2{
+    border-radius: 35px;
+    background-color:rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+
+}
+.Category-3{
+    border-radius: 35px;
+    background-color:rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+
+}
