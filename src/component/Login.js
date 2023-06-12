@@ -46,6 +46,7 @@ const login = e => {
 
 
   const handleGoogleSignIn =  e => {
+
     e.preventDefault()
     try {
       signInWithPopup(auth, provider).then(()=>{
@@ -68,7 +69,7 @@ const login = e => {
         <div className="Input-container-login">
           <h2>Login</h2>
         <center>
-          <Button variant="contained" width="100" onClick={handleGoogleSignIn} >Sign in with google </Button></center><br/><br/>
+          <Button  variant ="outlined" width="100" onClick={handleGoogleSignIn}> <img src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width={20} height={20}/>&nbsp;&nbsp; Sign In with Google</Button></center><br/><br/>
           <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/>       <br/><br/>
           <TextField label="Password"type="password"autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/>    <br/> <br/>
           <span><Link to='/'>Forgot password?</Link></span><br/><br/>

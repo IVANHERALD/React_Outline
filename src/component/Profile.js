@@ -4,6 +4,7 @@ import { Search } from 'semantic-ui-react'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
+
 function Profile() {
   const history=useNavigate();
   const handleClick=()=>{
