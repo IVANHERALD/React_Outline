@@ -11,8 +11,11 @@ function Profile() {
     history('/');
   }
   return (
-    <div>
-      <Search/><br/><br></br>
+    <div className="profile">
+      <div className='header'>
+        <h2 className='heading_text'> Find Your Essentials</h2>
+        <br/><br></br><Search/></div>
+      
       <div className='Categories'>
         <div className='Category-1'>
          <CameraAltIcon sx={{fontSize:80}} onClick={handleClick}/>
