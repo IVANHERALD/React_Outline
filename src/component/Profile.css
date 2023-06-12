@@ -1,8 +1,6 @@
 .Categories{
-    background-color: aqua;
     display: flex;
-    gap: 15px;
-    width: auto;
+
     height: 70px;
 }
 .Category-1{
