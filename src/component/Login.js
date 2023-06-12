@@ -4,8 +4,10 @@ import { useNavigate,Link } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import {TextField,Button} from '@mui/material';
 import login_image from '../Images/loginImage.jpg';
-import {signInWithEmailAndPassword, sendEmailVerification} from 'firebase/auth'
-import {auth} from './Firebase'
+
+import { signInWithEmailAndPassword, sendEmailVerification, signInWithPopup } from 'firebase/auth';
+
+import {auth,provider} from './Firebase'
 import "./style.css";
 import { useAuthValue } from "../AuthContext"
 
@@ -16,8 +18,10 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  
+  const [value,setValue]=useState('')
 
+  
+  
 const handleClick=()=>{
   console.log(currentUser)
   history('/Register');
@@ -40,13 +44,31 @@ const login = e => {
   .catch(err => setError(err.message))
 }
 
+
+  const handleGoogleSignIn =  e => {
+    e.preventDefault()
+    try {
+      signInWithPopup(auth, provider).then(()=>{
+        history('/Profile')
+      })
+      .catch(err=>alert(err.message))
+      
+      
+      // Sign-in successful, perform additional actions or redirect
+    } catch (error) {
+      console.error(error);
+    }
+  };
+      
+
+
   return (
     <div className="app">
       <div className="Input-container-main">
         <div className="Input-container-login">
           <h2>Login</h2>
         <center>
-          <GoogleLogin  width="100" ></GoogleLogin></center><br/><br/>
+          <Button variant="contained" width="100" onClick={handleGoogleSignIn} >Sign in with google </Button></center><br/><br/>
           <TextField id="outlined" label="Email address" value={email} onChange={(e)=>setEmail(e.target.value)}/>       <br/><br/>
           <TextField label="Password"type="password"autoComplete="current-password" value={password} onChange={(e)=>setPassword(e.target.value)}/>    <br/> <br/>
           <span><Link to='/'>Forgot password?</Link></span><br/><br/>
