@@ -9,6 +9,7 @@ import { AuthProvider } from './AuthContext';
 import {useState,useEffect} from 'react'
 import {auth} from './component/Firebase'
 import {onAuthStateChanged} from 'firebase/auth'
+import RentCatergory from './component/RentCatergory';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -29,6 +30,7 @@ function App() {
           <Route path="/Register" element={<Register/>}/>
           <Route path="/VerifyEmail" element={<VerifyEmail/>}/>
           <Route path="/Profile" element={<Profile/>}/>
+          <Route path="/RentCatergory" element={<RentCatergory/>}/>
 
          </Routes>
          </AuthProvider>

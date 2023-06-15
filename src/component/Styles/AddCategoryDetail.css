@@ -1,0 +1,24 @@
+.Form{
+    gap: 4px;
+    margin-bottom: 90%;
+    padding: 7px 7px;
+    margin: 2px ;
+    column-gap: 20px;
+    display: flex;
+}
+.AddCatergoryDetails{
+    border: 1px solid;
+    gap: 5px;
+    margin-bottom: 90%;
+    padding: 7px 15px;
+    margin: 5px ;
+    column-gap: 30px;
+    display: flex;
+}
+.header{
+    font-weight: 700;
+    align-items: center;
+    text-align: center;
+    text-indent: 10px;
+}
+

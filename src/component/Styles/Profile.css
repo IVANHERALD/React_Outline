@@ -1,0 +1,62 @@
+.header{
+    height:150px;
+    background-image: url("https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
+.heading_text{
+    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size:35px;
+    color: white;
+
+}
+.Categories{
+    display: flex;
+
+    height: 70px;
+}
+.Category-1{
+    
+    border-radius: 45px;
+    background-color: rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+    width: 90px;
+
+}
+.Category-2{
+    border-radius: 45px;
+    background-color:rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+    width: 90px;
+
+}
+.Category-3{
+    border-radius: 45px;
+    background-color:rgb(242, 235, 235);
+    height: 80px;
+    font-size: large;
+    width: 90px;
+    align-items: center;
+    margin-top: auto;
+
+}
+.ShoppingCart{
+    justify-content: left;
+    position: absolute;
+    top:0;
+    right: 95px;
+    
+}
+.Rental{
+    
+    border-radius: 10px;
+    
+    height: auto;
+    width: auto;
+    position: absolute;
+    top:0;
+    right: 0;
+}
