@@ -1,10 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useTheme } from '@mui/material/styles';
+import { useFormik } from "formik";
+import { Country ,State,City } from "country-state-city";
+
+
 import OutlinedInput from '@mui/material/OutlinedInput';
 import './Styles/AddCategoryDetail.css'
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import UploadPhoto from './UploadPhoto'
 
-import {Container, FormControl, InputLabel, Select,MenuItem, TextField,FilledInput,InputAdornment,Button, Box } from '@mui/material'
+import {Container, FormControl, InputLabel,MenuItem, TextField,FilledInput,Select,InputAdornment,Button, Box } from '@mui/material'
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -48,7 +53,6 @@ const Brand = [
     };
   }
   
-
 function AddCategoryDetails() {
     const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -62,6 +66,35 @@ function AddCategoryDetails() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+  const addressFromik = useFormik({
+    initialValues: {
+      country: "India",
+      state: null,
+      city: null
+    },
+    onSubmit: (values) => console.log(JSON.stringify(values))
+  });
+
+  const countries = Country.getAllCountries();
+
+  const updatedCountries = countries.map((country) => ({
+    label: country.name,
+    value: country.id,
+    ...country
+  }));
+  const updatedStates = (countryId) =>
+    State
+      .getStatesOfCountry(countryId)
+      .map((state) => ({ label: state.name, value: state.id, ...state }));
+  const updatedCities = (stateId) =>
+    City
+      .getCitiesOfState(stateId)
+      .map((city) => ({ label: city.name, value: city.id, ...city }));
+
+  const { values, handleSubmit, setFieldValue, setValues } = addressFromik;
+
+  useEffect(() => {}, [values]);
+
   
   return (
     <div className='AddCategoryDetails'>
@@ -114,11 +147,46 @@ function AddCategoryDetails() {
           </FormControl>
           </div>
           <hr/>
-          <div>UPLOAD UP TO 12 PHOTOS</div><hr/>
+          <span>UPLOAD UP TO 12 PHOTOS
+           <span> <UploadPhoto/><UploadPhoto/></span></span><hr/>
           <div className='Form'>
           <FormControl sx={{m:1,minWidth:450}}>
             CONFIRM YOUR LOCATION<br/>
-            <Select label='State' sx={{width:'450px'}}></Select>
+            <form onSubmit={handleSubmit}>
+        <Select
+          id="country"
+          name="country"
+          label="country"
+          options={updatedCountries}
+          value={values.country}
+          // onChange={value => {
+          //   setFieldValue("country", value);
+          //   setFieldValue("state", null);
+          //   setFieldValue("city", null);
+          // }}
+          onChange={(value) => {
+            setValues({ country: value, state: null, city: null }, false);
+          }}
+        />
+        <Select
+          id="state"
+          name="state"
+          options={updatedStates(values.country ? values.country.value : null)}
+          value={values.state}
+          onChange={(value) => {
+            setValues({ state: value, city: null }, false);
+          }}
+        />
+        <Select
+          id="city"
+          name="city"
+          options={updatedCities(values.state ? values.state.value : null)}
+          value={values.city}
+          onChange={(value) => setFieldValue("city", value)}
+        />
+        <button type="submit">Submit</button>
+        <p>{JSON.stringify(Country.get)}</p>
+      </form>
             </FormControl>
           </div>
           <hr/>

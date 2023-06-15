@@ -35,16 +35,16 @@ function RentCatergory() {
         <Collapse in={openElectronics} timeout="auto" unmountOnExit>
             <List>
                 <ListItemButton>
-                    <ListItemText primary="electronics 1"/>
+                    <ListItemText primary="Tv"/>
                 </ListItemButton>
                 <ListItemButton>
-                    <ListItemText primary="electronics 2"/>
+                    <ListItemText primary="AC"/>
                 </ListItemButton>
                 <ListItemButton>
-                    <ListItemText primary="electronics 3"/>
+                    <ListItemText primary="Camera"/>
                 </ListItemButton>
                 <ListItemButton>
-                    <ListItemText primary="electronics 4"/>
+                    <ListItemText primary="Gaming"/>
                 </ListItemButton>
             </List>
          </Collapse>
@@ -55,11 +55,9 @@ function RentCatergory() {
         <ListItemButton >
             <ListItemText primary="Furniture"/>
         </ListItemButton>
+        
         <ListItemButton>
-            <ListItemText primary="Books" />
-        </ListItemButton>
-        <ListItemButton>
-            <ListItemText primary="Commercial Vehicles and spares"/>
+            <ListItemText primary="Books, Sports& Hobbies "/>
         </ListItemButton>
  
          

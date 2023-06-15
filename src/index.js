@@ -9,6 +9,7 @@ import Footer from './component/Footer';
 import 'semantic-ui-css/semantic.min.css';
 import RentCatergory from './component/RentCatergory';
 import AddCategoryDetails from './component/AddCategoryDetails';
+import PhotoUploadForm from './component/UploadPhoto';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
