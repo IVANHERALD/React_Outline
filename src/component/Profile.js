@@ -1,6 +1,6 @@
 import React from 'react'
 import Footer from './Footer'
-import { Search } from 'semantic-ui-react'
+import { Button, Search } from 'semantic-ui-react'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
@@ -9,6 +9,9 @@ function Profile() {
   const history=useNavigate();
   const handleClick=()=>{
     history('/');
+  }
+  const handlecategory=()=>{
+    history('/sellCategory');
   }
   return (
     <div className="profile">
@@ -27,6 +30,7 @@ function Profile() {
          <CameraAltIcon sx={{fontSize:80}}/>
         </div>
       </div>
+      <Button variant="contained" onClick={handlecategory}> CLICK </Button>
       <Footer/>
     </div>
   )

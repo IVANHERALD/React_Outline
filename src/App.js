@@ -4,6 +4,7 @@ import Login from './component/Login';
 import Register from './component/Register';
 import Profile from './component/Profile';
 import VerifyEmail from './component/VerifyEmail';
+import SellCategory from './component/SellCategory';
 import {  Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './AuthContext';
 import {useState,useEffect} from 'react'
@@ -29,7 +30,7 @@ function App() {
           <Route path="/Register" element={<Register/>}/>
           <Route path="/VerifyEmail" element={<VerifyEmail/>}/>
           <Route path="/Profile" element={<Profile/>}/>
-
+          <Route path="/SellCategory" element={<SellCategory/>}/>
          </Routes>
          </AuthProvider>
     </div>
