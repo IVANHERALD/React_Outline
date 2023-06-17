@@ -4,12 +4,12 @@ import Login from './component/Login';
 import Register from './component/Register';
 import Profile from './component/Profile';
 import VerifyEmail from './component/VerifyEmail';
-import SellCategory from './component/SellCategory';
 import {  Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './AuthContext';
 import {useState,useEffect} from 'react'
 import {auth} from './component/Firebase'
 import {onAuthStateChanged} from 'firebase/auth'
+import RentCatergory from './component/RentCatergory';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -30,7 +30,10 @@ function App() {
           <Route path="/Register" element={<Register/>}/>
           <Route path="/VerifyEmail" element={<VerifyEmail/>}/>
           <Route path="/Profile" element={<Profile/>}/>
-          <Route path="/SellCategory" element={<SellCategory/>}/>
+
+          <Route path="/RentCatergory" element={<RentCatergory/>}/>
+
+
          </Routes>
          </AuthProvider>
     </div>

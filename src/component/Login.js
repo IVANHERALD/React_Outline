@@ -8,7 +8,7 @@ import login_image from '../Images/loginImage.jpg';
 import { signInWithEmailAndPassword, sendEmailVerification, signInWithPopup } from 'firebase/auth';
 
 import {auth,provider} from './Firebase'
-import "./style.css";
+import "./Styles/style.css";
 import { useAuthValue } from "../AuthContext"
 
 function Login() {

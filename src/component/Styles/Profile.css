@@ -12,30 +12,51 @@
 
 }
 .Categories{
-    background-color: aqua;
     display: flex;
-    gap: 15px;
-    width: auto;
+
     height: 70px;
 }
 .Category-1{
-    border-radius: 35px;
+    
+    border-radius: 45px;
     background-color: rgb(242, 235, 235);
     height: 80px;
     font-size: large;
+    width: 90px;
 
 }
 .Category-2{
-    border-radius: 35px;
+    border-radius: 45px;
     background-color:rgb(242, 235, 235);
     height: 80px;
     font-size: large;
+    width: 90px;
 
 }
 .Category-3{
-    border-radius: 35px;
+    border-radius: 45px;
     background-color:rgb(242, 235, 235);
     height: 80px;
     font-size: large;
+    width: 90px;
+    align-items: center;
+    margin-top: auto;
 
+}
+.ShoppingCart{
+    justify-content: left;
+    position: absolute;
+    top:0;
+    right: 95px;
+    
+}
+.Rental{
+    
+    border-radius: 10px;
+    
+    height: auto;
+    width: auto;
+    position: absolute;
+    top:0;
+    right: 0;
 }
