@@ -3,13 +3,25 @@ import React from 'react'
 import ListItemText from '@mui/material/ListItemText';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import {useAuthValue} from '../AuthContext'
+import {useNavigate} from 'react-router-dom';
+
 function RentCatergory() {
+
     const [openElectronics, setOpenElectronics] = React.useState(false);
+    const {setSelectedCategory}=useAuthValue();
+
+    const history=useNavigate();
+
     const handleClickElectronics =()=>{
         setOpenElectronics(!openElectronics);
     }
 
+    const handleCategorySelection = (category) => {
+        setSelectedCategory(category);
+        history('/AddCategoryDetails')
 
+      }
 
   return (
     <div className="sellCategory">
@@ -23,7 +35,7 @@ function RentCatergory() {
          subheader={
             <ListSubheader>Choose a category</ListSubheader>
          }>
-        <ListItemButton>
+        <ListItemButton onClick={() => handleCategorySelection('Mobiles')}>
             <ListItemText primary="Mobiles"/>
         </ListItemButton>
         <ListItemButton onClick={handleClickElectronics}>
@@ -34,16 +46,16 @@ function RentCatergory() {
         
         <Collapse in={openElectronics} timeout="auto" unmountOnExit>
             <List>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleCategorySelection('Tv')}>
                     <ListItemText primary="Tv"/>
                 </ListItemButton>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleCategorySelection('AC')}>
                     <ListItemText primary="AC"/>
                 </ListItemButton>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleCategorySelection('Camera')}>
                     <ListItemText primary="Camera"/>
                 </ListItemButton>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleCategorySelection('Gaming')}>
                     <ListItemText primary="Gaming"/>
                 </ListItemButton>
             </List>
@@ -52,12 +64,12 @@ function RentCatergory() {
 
 
 
-        <ListItemButton >
+        <ListItemButton onClick={() => handleCategorySelection('Furniture')}>
             <ListItemText primary="Furniture"/>
         </ListItemButton>
         
-        <ListItemButton>
-            <ListItemText primary="Books, Sports& Hobbies "/>
+        <ListItemButton onClick={() => handleCategorySelection('BSH')}>
+            <ListItemText primary="Books,Sports & Hobbies "/>
         </ListItemButton>
  
          

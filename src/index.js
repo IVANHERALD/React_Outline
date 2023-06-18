@@ -10,12 +10,14 @@ import 'semantic-ui-css/semantic.min.css';
 import RentCatergory from './component/RentCatergory';
 import AddCategoryDetails from './component/AddCategoryDetails';
 import PhotoUploadForm from './component/UploadPhoto';
+import Profile from './component/Profile';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <GoogleOAuthProvider clientId='761985950049-qkpo9genj5hql966dk2dn7patviibb5d.apps.googleusercontent.com'><AddCategoryDetails /></GoogleOAuthProvider>
+      <GoogleOAuthProvider clientId='761985950049-qkpo9genj5hql966dk2dn7patviibb5d.apps.googleusercontent.com'><App /></GoogleOAuthProvider>
     </Router>
   </React.StrictMode>
 );

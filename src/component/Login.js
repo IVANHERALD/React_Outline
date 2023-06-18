@@ -60,6 +60,9 @@ const login = e => {
       console.error(error);
     }
   };
+  const handlee=()=>{
+    history('/Profile')
+  }
       
 
 

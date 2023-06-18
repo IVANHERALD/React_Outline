@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { Country, State, City } from "country-state-city";
@@ -10,7 +10,8 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import UploadPhoto from './UploadPhoto'
 
 import { Container, FormControl, InputLabel, MenuItem, TextField, FilledInput, Select, InputAdornment, Button, Box } from '@mui/material'
-import { getAllStates } from 'country-state-city/lib/state';
+import { useAuthValue } from '../AuthContext';
+
 
 
 const ITEM_HEIGHT = 48;
@@ -24,14 +25,12 @@ const MenuProps = {
   },
 };
 const Brand = [
-  <b>Popular Brand</b>,
   'Iphone',
   'Samsung',
   'Vivo',
   'Mi',
   'oppo',
   'Realme',
-  <b>All Brand</b>,
   'Asus',
   'Google pixel',
   'HTC',
@@ -42,10 +41,7 @@ const Brand = [
   'Oneplus',
   'Oppo',
   'Realme',
-  'Sony',
-
-
-
+  'Sony'
 ];
 function getStyles(name, brandName, theme) {
   return {
@@ -59,11 +55,15 @@ function getStyles(name, brandName, theme) {
 function AddCategoryDetails() {
   const theme = useTheme();
   const [brandName, setBrandName] = React.useState([]);
-
+  const [adTitle,setAdTitle]=useState('')
+  const [description,setDescription]=useState('')
+  const [price,setPrice]=useState('')
   const [countryCode, setcountryCode] = React.useState([]);
   const [stateCode, setstateCode] = React.useState([]);
   const [cityCode, setCityCode] = React.useState([]);
-  
+  const {selectedCategory} = useAuthValue();
+  const {currentUser}=useAuthValue();
+  const {newPhotos}=useAuthValue();
 
 
   const handleChange = (event) => {
@@ -90,14 +90,16 @@ function AddCategoryDetails() {
   const countries = Country.getAllCountries();
   
 
-  
-
   const { values, handleSubmit, setFieldValue, setValues } = addressFromik;
 
   useEffect(() => { }, [values]);
 
+  const handleClick=()=>{
+    console.log(selectedCategory,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email)
+  }
 
-
+  
+ 
 
   // useEffect(() => {
   //   console.log(countryCode);
@@ -112,7 +114,7 @@ function AddCategoryDetails() {
     <div className='AddCategoryDetails'>
       <Container maxWidth="sm" sx={{ border: 2 }}>
         <div className='header'>
-          SELECTED CATEGORY
+          SELECTED CATEGORY - {selectedCategory}
         </div>
         <hr style={{ width: '572px' }}></hr>
         <div>
@@ -121,32 +123,33 @@ function AddCategoryDetails() {
         </div>
         <div className='Form'>
           <Box sx={{ '& .MuiTextField-root': { m: 2 }, '& .MuiSelect-root': { m: 2 } }}>
+          
+          {selectedCategory==='Mobiles'?
+            <FormControl sx={{  minWidth: 415 }}>
+            <InputLabel>Brand</InputLabel>
+            <Select
+              label="Brand"
+              value={brandName}
+              onChange={handleChange}
+              input={<OutlinedInput label="Name" />}
+              MenuProps={MenuProps}
+            >
+              {Brand.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, brandName, theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+            </FormControl>
+          :null}
+
             <FormControl sx={{ m: 4, minWidth: 450 }}>
-              <InputLabel>Brand</InputLabel>
-              <Select label="Brand"
-                value={brandName}
-                onChange={handleChange}
-                input={<OutlinedInput label="Name" />}
-                MenuProps={MenuProps}>
-                
-                {Brand.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, brandName, theme)}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-
-
-
-
-
-
-              <TextField variant='outlined' label='Ad Title' />
-              <TextField variant='outlined' multiline label='Description' rows={6}>
+              <TextField variant='outlined' label='Ad Title' value={adTitle} onChange={(e)=>setAdTitle(e.target.value)}/>
+              <TextField variant='outlined' multiline label='Description' rows={6} value={description} onChange={(e)=>setDescription(e.target.value)}>
                 Description
               </TextField>
             </FormControl>
@@ -157,12 +160,12 @@ function AddCategoryDetails() {
           <FormControl sx={{ m: 1, minWidth: 450 }}>
             SET A PRICE
 
-            <TextField variant='outlined' InputProps={{ startAdornment: (<InputAdornment position='start'><CurrencyRupeeIcon /></InputAdornment>) }}></TextField>
+            <TextField variant='outlined' InputProps={{ startAdornment: (<InputAdornment position='start'><CurrencyRupeeIcon /></InputAdornment>) }} value={price} onChange={(e)=>setPrice(e.target.value)}></TextField>
           </FormControl>
         </div>
         <hr />
-        <span>UPLOAD UP TO 12 PHOTOS
-          <span> <UploadPhoto /><UploadPhoto /></span></span><hr />
+        <span>UPLOAD UP TO 12 PHOTOS  <br/>
+          <span> <UploadPhoto /></span></span><hr />
         <div className='Form'>
           <FormControl sx={{ m: 1, minWidth: 450 }}>
             CONFIRM YOUR LOCATION<br />
@@ -176,7 +179,7 @@ function AddCategoryDetails() {
                 ))}
           </Select>
 
-
+          <InputLabel>Country</InputLabel>
           <Select label="State"
                 value={stateCode}
                 onChange={(e)=> {setstateCode(e.target.value) }}
@@ -201,17 +204,15 @@ function AddCategoryDetails() {
         <div className='Form'>
           <FormControl sx={{ m: 1, minWidth: 450 }}>
             REVIEW YOUR DETAILS<br />
-            <TextField variant='outlined' label='Name'></TextField>
+            <TextField variant='outlined' label='Name' defaultValue={ currentUser ? currentUser.displayName:''}></TextField>
+            <TextField variant='outlined' label='email' defaultValue={currentUser ? currentUser.email:''}></TextField>
+            
           </FormControl>
         </div>
         <hr />
         <div className='Form'>
           <FormControl sx={{ m: 1, minWidth: 450 }}>
-
-
-          
-
-            <Button variant='outlined' sx={{ width: 'auto' }} >Post now</Button>
+            <Button variant='outlined' sx={{ width: 'auto' }} onClick={handleClick}>Post now</Button>
           </FormControl>
         </div>
       </Container>

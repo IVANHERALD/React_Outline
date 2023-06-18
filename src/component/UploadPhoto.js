@@ -1,63 +1,76 @@
-import { TextField,InputAdornment,Button } from '@mui/material';
-import React, { useState,useRef } from 'react';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import './Styles/UploadPhoto.css'
-
-const PhotoUploadForm = () => {
-  const [selectedPhotos, setSelectedPhotos] = useState([]);
-  const fileInputRef = useRef(null);
-
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handlePhotoUpload = (event) => {
-    const files = event.target.files;
-    const selectedPhotosArray = Array.from(files);
-    setSelectedPhotos(selectedPhotosArray);
-  };
+import {React,useState} from 'react';
+import Button from '@material-ui/core/Button';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import IconButton from '@material-ui/core/IconButton';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { Grid } from '@mui/material';
+import { useAuthValue } from '../AuthContext';
+const UploadPhoto = () => {
+  
+  const [imageURLs, setImageURLs] = useState([]);
+  const {newPhotos,photos,setPhotos}=useAuthValue();
+  
+  const handlePhotoUpload = (index, file) => {
+    
+    newPhotos[index] = file;
+    setPhotos(newPhotos);
+    console.log('Uploaded file:', newPhotos);
+    if(newPhotos){
+    const reader = new FileReader();
+    reader.onload = () => {
+      const uploadedImageUrl = reader.result;
+      setImageURLs((prevURLs) => {
+        const updatedURLs = [...prevURLs];
+        updatedURLs[index] = uploadedImageUrl;
+        return updatedURLs;
+        
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Create a new FormData object
-    const formData = new FormData();
-
-    // Append each selected photo to the FormData object
-    selectedPhotos.forEach((photo, index) => {
-      formData.append(`photo${index}`, photo);
-    });
-
-    // Send the formData to your server for processing
-    // You can use libraries like axios or fetch for making the HTTP request
-    // Example using axios:
-    // axios.post('/upload', formData)
-    //   .then(response => {
-    //     // Handle the response from the server
-    //   })
-    //   .catch(error => {
-    //     // Handle any errors that occurred during the upload
-    //   });
-    const uploadedImageCount = selectedPhotos.length;
-    console.log(`Total images uploaded: ${uploadedImageCount}`);
+    // Perform further actions with the uploaded photos
+    console.log(photos);
   };
+  
+  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="file"
-        accept="image/*"
-        id="upload-input"
-        style={{ display: 'none' }}
-        ref={fileInputRef}
-        onChange={handlePhotoUpload}
-        multiple
-      />
-      <Button className='UploadButton' variant="outlined"sx={{borderColor:'black',color:'black',width:'100px',height:'120px'}} component="span" onClick={handleButtonClick} startIcon={<AddAPhotoIcon style={{fontSize:40}}/>}>
-       <b> Add Photo</b>
-      </Button>
-    </form>
+    <div>
+       <Grid container spacing={2}>
+        {[...Array(12)].map((_,index) => (
+          <Grid item xs={3} key={index}>
+          <div key={index}>
+            <label>
+             
+              <input type="file" accept="image/png,image/jpg,image/jpeg" onChange={(e) => handlePhotoUpload(index, e.target.files[0])}  style={{ display: 'none' }}/>
+              <Button variant="contained" sx={{borderColor:'#050505',color:'#050505'}} component="span" id="upload-button"
+               style={{width:'135px',height:'130px'}} startIcon={<AddPhotoAlternateIcon style={{fontSize:80}} />}>
+                <div
+                  style={{
+                    backgroundImage: `url(${imageURLs[index]})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                  }}
+                ></div>
+               </Button>
+            </label>
+          </div>
+          </Grid>
+        ))}
+        </Grid>
+        
+    </div>
   );
 };
 
-export default PhotoUploadForm;
+export default UploadPhoto;
