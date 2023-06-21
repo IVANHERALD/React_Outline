@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Footer from './Footer'
 import { Search } from 'semantic-ui-react'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -8,18 +8,24 @@ import ChairIcon from '@mui/icons-material/Chair';
 import { FaMobile, FaTools } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
-
-
 import { Grid, Button } from '@mui/material';
+import CategoryPage from './CategoryPage';
+
 
 function Profile() {
   const history = useNavigate();
+ 
+
+ //const prodRef=rootRef.child('product');
+
   const handleClick = () => {
     history('/');
   }
   const AddIconfunction = () => {
     history('/RentCatergory');
   }
+
+
   return (
     <div className="profile">
       <div className='header'>
@@ -54,6 +60,12 @@ function Profile() {
             </div>
           </Grid>
         </Grid>
+      </div>
+      <div className='recently-added'>
+      <h3> Recently Added</h3>
+      <CategoryPage/>
+
+      
       </div>
 
       <Footer />
