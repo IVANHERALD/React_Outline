@@ -5,30 +5,36 @@ import IconButton from '@material-ui/core/IconButton';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { Grid } from '@mui/material';
 import { useAuthValue } from '../AuthContext';
+import { getStorage, ref as storageRef, uploadBytes,getDownloadURL } from "firebase/storage";
+const storage = getStorage();
+
 const UploadPhoto = () => {
   
   const [imageURLs, setImageURLs] = useState([]);
   const {newPhotos,photos,setPhotos}=useAuthValue();
   
-  const handlePhotoUpload = (index, file) => {
-    
-    newPhotos[index] = file;
+  const handlePhotoUpload = async(index, file) => {
+    try {
+    const storageReference = storageRef(storage, `photos/${file.name}`);
+    await uploadBytes(storageReference, file);
+
+    // Get the download URL of the uploaded photo
+    const downloadURL = await getDownloadURL(storageReference);
+
+    // Update the newPhotos array and image URLs
+    newPhotos[index] = downloadURL;
     setPhotos(newPhotos);
-    console.log('Uploaded file:', newPhotos);
-    if(newPhotos){
-    const reader = new FileReader();
-    reader.onload = () => {
-      const uploadedImageUrl = reader.result;
-      setImageURLs((prevURLs) => {
-        const updatedURLs = [...prevURLs];
-        updatedURLs[index] = uploadedImageUrl;
-        return updatedURLs;
-        
-      });
-    };
-    reader.readAsDataURL(file);
+
+    // Update the image URL state
+    setImageURLs((prevURLs) => {
+      const updatedURLs = [...prevURLs];
+      updatedURLs[index] = downloadURL;
+      return updatedURLs;
+    });
+  } catch (error) {
+    console.error('Error uploading photo:', error);
   }
-   };
+};
   
 
   const handleSubmit = (event) => {

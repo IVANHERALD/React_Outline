@@ -16,7 +16,7 @@ import AddCategoryDetails from './component/AddCategoryDetails'
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [timeActive, setTimeActive] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [category, setSelectedCategory] = useState(null);
   const [photos, setPhotos] = useState([]);
   const newPhotos = [...photos];
 
@@ -28,7 +28,7 @@ function App() {
   
   return (
     <div className="App">
-      <AuthProvider value={{photos,setPhotos,newPhotos,currentUser,timeActive, setTimeActive,selectedCategory,setSelectedCategory}}>
+      <AuthProvider value={{photos,setPhotos,newPhotos,currentUser,timeActive, setTimeActive,category,setSelectedCategory}}>
          <Routes>
          
           <Route path="/" element={<Login/>}/>
@@ -36,7 +36,7 @@ function App() {
           <Route path="/VerifyEmail" element={<VerifyEmail/>}/>
           <Route path="/Profile" element={<Profile/>}/>
           <Route path="/RentCatergory" element={<RentCatergory/>}/>
-          <Route path="/AddCategoryDetails" element={<AddCategoryDetails/>}/>
+          <Route path="/AddCategoryDetails/:category" element={<AddCategoryDetails/>}/>
          </Routes>
          </AuthProvider>
     </div>

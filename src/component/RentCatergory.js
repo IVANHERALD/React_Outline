@@ -19,7 +19,7 @@ function RentCatergory() {
 
     const handleCategorySelection = (category) => {
         setSelectedCategory(category);
-        history('/AddCategoryDetails')
+        history('/AddCategoryDetails/'+category)
 
       }
 

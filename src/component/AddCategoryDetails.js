@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { Country, State, City } from "country-state-city";
+import {db} from "./Firebase";
+import{ref,set,push,getDatabase} from "firebase/database";
+import {getStorage, ref as storageRef,uploadBytes} from "firebase/storage"
+import { useParams } from 'react-router-dom';
 
 
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -11,6 +15,9 @@ import UploadPhoto from './UploadPhoto'
 
 import { Container, FormControl, InputLabel, MenuItem, TextField, FilledInput, Select, InputAdornment, Button, Box } from '@mui/material'
 import { useAuthValue } from '../AuthContext';
+
+const database = getDatabase();
+const storage = getStorage();
 
 
 
@@ -53,6 +60,7 @@ function getStyles(name, brandName, theme) {
 }
 
 function AddCategoryDetails() {
+  const { category } = useParams();
   const theme = useTheme();
   const [brandName, setBrandName] = React.useState([]);
   const [adTitle,setAdTitle]=useState('')
@@ -61,10 +69,11 @@ function AddCategoryDetails() {
   const [countryCode, setcountryCode] = React.useState([]);
   const [stateCode, setstateCode] = React.useState([]);
   const [cityCode, setCityCode] = React.useState([]);
-  const {selectedCategory} = useAuthValue();
+ 
   const {currentUser}=useAuthValue();
   const {newPhotos}=useAuthValue();
-
+  const [displayName, setDisplayName] = useState(currentUser?.displayName || '');
+  const [email, setEmail] = useState(currentUser?.email || '');
 
   const handleChange = (event) => {
     const {
@@ -76,6 +85,10 @@ function AddCategoryDetails() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+  useEffect(() => {
+    setDisplayName(currentUser?.displayName || '');
+    setEmail(currentUser?.email || '');
+  }, [currentUser]);
 
 
   const addressFromik = useFormik({
@@ -95,8 +108,27 @@ function AddCategoryDetails() {
   useEffect(() => { }, [values]);
 
   const handleClick=()=>{
-    console.log(selectedCategory,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email)
-  }
+    console.log(category,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email);
+    const productId = push(ref(db, 'product')).key;
+    const productref=ref(db,'product')
+    const productData=[{
+      category,
+      brandName,
+      adTitle,
+      description,
+      price,
+      newPhotos,countryCode,stateCode,cityCode,
+      displayName:currentUser.displayName,
+      email:currentUser.email
+    }];
+  set(ref(db,'product/'+productId), productData)
+    .then(() => {
+      console.log('Data saved successfully');
+    })
+    .catch((error) => {
+      console.error('Error saving data:', error);
+    });
+  };
 
   
  
@@ -114,7 +146,7 @@ function AddCategoryDetails() {
     <div className='AddCategoryDetails'>
       <Container maxWidth="sm" sx={{ border: 2 }}>
         <div className='header'>
-          SELECTED CATEGORY - {selectedCategory}
+          SELECTED CATEGORY - {category}
         </div>
         <hr style={{ width: '572px' }}></hr>
         <div>
@@ -124,7 +156,7 @@ function AddCategoryDetails() {
         <div className='Form'>
           <Box sx={{ '& .MuiTextField-root': { m: 2 }, '& .MuiSelect-root': { m: 2 } }}>
           
-          {selectedCategory==='Mobiles'?
+          {category==='Mobiles'?
             <FormControl sx={{  minWidth: 415 }}>
             <InputLabel>Brand</InputLabel>
             <Select
@@ -204,8 +236,8 @@ function AddCategoryDetails() {
         <div className='Form'>
           <FormControl sx={{ m: 1, minWidth: 450 }}>
             REVIEW YOUR DETAILS<br />
-            <TextField variant='outlined' label='Name' defaultValue={ currentUser ? currentUser.displayName:''}></TextField>
-            <TextField variant='outlined' label='email' defaultValue={currentUser ? currentUser.email:''}></TextField>
+            <TextField variant='outlined' label='Name' value={displayName} onChange={(e) => setDisplayName(e.target.value)}></TextField>
+            <TextField variant='outlined' label='email'value={email} onChange={(e) => setEmail(e.target.value)}></TextField>
             
           </FormControl>
         </div>
