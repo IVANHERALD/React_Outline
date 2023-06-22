@@ -68,7 +68,7 @@ function Profile() {
       
       </div>
 
-      <Footer />
+      
     </div>
   )
 }

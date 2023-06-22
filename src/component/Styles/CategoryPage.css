@@ -1,0 +1,19 @@
+.display-buy{
+    border: 10px;
+    background-color: whitesmoke;
+    width: 290px;
+    height: 290px;
+    
+
+}
+.image{
+    width: 270px;
+    height: 180px;
+    align-items: center;
+    align-content: center;
+    margin-top: auto;
+    padding-top: 10px;
+}
+.price{
+    font-size: medium;
+}

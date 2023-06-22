@@ -23,6 +23,7 @@
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.3",
+    "react-simple-image-slider": "^2.4.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "styled-components": "^5.3.11",

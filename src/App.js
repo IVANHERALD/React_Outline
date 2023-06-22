@@ -13,6 +13,7 @@ import {onAuthStateChanged} from 'firebase/auth'
 import RentCatergory from './component/RentCatergory';
 import AddCategoryDetails from './component/AddCategoryDetails'
 import CategoryPage from './component/CategoryPage';
+import RentProductPage from './component/RentProductPage';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -39,6 +40,7 @@ function App() {
           <Route path="/RentCatergory" element={<RentCatergory/>}/>
           <Route path="/AddCategoryDetails/:category" element={<AddCategoryDetails/>}/>
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/RentProductPage/:productId" element={<RentProductPage/>}/>
 
          </Routes>
          </AuthProvider>
