@@ -2,65 +2,50 @@ import React, { useEffect, useState } from 'react';
 import { db } from './Firebase';
 import { onValue, ref } from 'firebase/database';
 import SimpleImageSlider from 'react-simple-image-slider';
-import styled from 'styled-components';
 import { useParams } from 'react-router';
 
 
-const RentProductContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const SliderContainer = styled.div`
-  width: 500px;
-  height: 250px;
-`;
-
-const ProductDetailsContainer = styled.div`
-  width: 500px;
-  margin-top: 20px;
-`;
-
-const PriceContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
-
-
 const RentProductPage = () => {
-    const {productId}=useParams();
+  const { productId } = useParams();
   const [product, setProduct] = useState(null);
-  const sliderImages = [];
+  const [sliderImages, setSliderImages] = useState([]);
 
-  
+  useEffect(() => {
+    const productRef = ref(db, `product/${productId}`);
+    onValue(productRef, (snapshot) => {
+      const data = snapshot.val();
+      setProduct(data);
+    });
+  }, [productId]);
 
-  // Push product photos to the sliderImages array
- 
+  useEffect(() => {
+    console.log(sliderImages)
+  }, [sliderImages]);
+
+  useEffect(() => {
+    if (product && product[0].newPhotos) {
+      const images = product[0].newPhotos.map((image) => ({
+        url: image
+      }));
+      setSliderImages(images);
+    }
+  }, [product]);
 
   return (
-    <RentProductContainer>
-        <p>{productId}</p>
-      <SliderContainer>
-        <SimpleImageSlider images={sliderImages} width={500} height={250} />
-      </SliderContainer>
-      <ProductDetailsContainer>
-       
+    
+      <div>
+        <SimpleImageSlider images={sliderImages} width={500} height={500} />
         <hr />
-        <PriceContainer>
           <div>
             <h3>Price:</h3>
-           
+            {product && <p>{product[0].price}</p>}
           </div>
-          <div>
+          {/* <div>
             <h3>Other Details:</h3>
-            
-            {/* Render other product details */}
+            {product && <p>{product.otherDetails}</p>}
+          </div> */}
           </div>
-        </PriceContainer>
-      </ProductDetailsContainer>
-    </RentProductContainer>
+       
   );
 };
 

@@ -1,9 +1,14 @@
+.image-container{
+    display: flex; /* Use flexbox to create a row layout */
+    flex-wrap: wrap; /* Wrap the images to the next line if they exceed the container width */
+    justify-content: flex-start; 
+}
 .display-buy{
     border: 10px;
     background-color: whitesmoke;
     width: 290px;
     height: 290px;
-    
+    margin: 10px; 
 
 }
 .image{

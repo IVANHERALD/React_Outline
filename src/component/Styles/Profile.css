@@ -51,9 +51,7 @@
     
 }
 .Rental{
-    
     border-radius: 10px;
-    
     height: auto;
     width: auto;
     position: absolute;
@@ -63,5 +61,5 @@
 
 .recently-added{
     margin-top: 50px;
-    background-color:blueviolet;
+    background-color:#E4F0F7;
 }

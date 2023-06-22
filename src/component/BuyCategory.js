@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useEffect,useState} from 'react'
 import { Slide, Slider } from '@mui/material'
 
 function BuyCatergory() {
@@ -8,6 +8,8 @@ function BuyCatergory() {
       setValue(newValue);
       console.log(newValue);
     };
+
+    
   return (
     <div>
         <div style={{width:'300px',display:'block'}}>

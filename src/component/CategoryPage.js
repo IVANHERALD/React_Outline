@@ -12,10 +12,10 @@ function CategoryPage() {
 
         history('/RentProductPage/'+productId);
       }
-      const [productKeys, setProductKeys] = useState([]);
-   const [recentyAdded,setRecentlyAdded]=useState([]);
-  const prodRef = ref(db, 'product');
-  useEffect(()=> {
+    const [productKeys, setProductKeys] = useState([]);
+    const [recentyAdded,setRecentlyAdded]=useState([]);
+    const prodRef = ref(db, 'product');
+    useEffect(()=> {
     onValue(prodRef, (snapshot) => {
       const data = snapshot.val();
       const recentlyAddedData = Object.values(data);
@@ -31,13 +31,11 @@ function CategoryPage() {
   }, [recentyAdded]);
 
   return (
-    <div>
+    <div className='image-container'>
         {recentyAdded.map((item, index) => (
       <div key={index}>
-      
-    <div className='display-buy'>
-        
-        <img className='image' src={item[0].newPhotos[0]} onClick={()=>handleclick1(productKeys[index])}></img>
+      <div className='display-buy'>
+       <img className='image' src={item[0].newPhotos[0]} onClick={()=>handleclick1(productKeys[index])}></img>
         <br></br>
       <b className='price'> ₹ {item[0].price}</b> <br/>
         {item[0].description}
