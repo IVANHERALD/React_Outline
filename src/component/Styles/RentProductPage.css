@@ -1,0 +1,10 @@
+.img{
+
+    height: 200px;
+    width: 400px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    max-width: fit-content;
+    max-height: min-content;
+}

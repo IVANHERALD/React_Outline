@@ -69,6 +69,10 @@ function AddCategoryDetails() {
   const [countryCode, setcountryCode] = React.useState([]);
   const [stateCode, setstateCode] = React.useState([]);
   const [cityCode, setCityCode] = React.useState([]);
+  const [countryName, setCountryName] = useState('');
+  const [stateName, setStateName] = useState('');
+  const [cityName, setCityName] = useState('');
+
  
   const {currentUser}=useAuthValue();
   const {newPhotos}=useAuthValue();
@@ -108,7 +112,7 @@ function AddCategoryDetails() {
   useEffect(() => { }, [values]);
 
   const handleClick=()=>{
-    console.log(category,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email);
+    console.log(category,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email,countryName,stateName,cityName);
     const productId = push(ref(db, 'product')).key;
     const productref=ref(db,'product')
     const productData=[{
@@ -141,6 +145,32 @@ function AddCategoryDetails() {
   //   console.log(stateCode);
   //   console.log(City.getCitiesOfState(countryCode,stateCode))
   // }, [stateCode]);
+  useEffect(() => {
+    if (countryCode) {
+      const country = Country.getCountryByCode(countryCode);
+      if (country) {
+      setCountryName(country.name);
+    }}
+  }, [countryCode]);
+
+  useEffect(() => {
+    if (countryCode && stateCode) {
+      const state = State.getStateByCode(countryCode, stateCode);
+      if (state) {
+        setStateName(state.name);
+      
+      setStateName(state.name);
+    }}
+  }, [countryCode, stateCode]);
+
+  useEffect(() => {
+    if (countryCode && stateCode && cityCode) {
+      const city = City.getCityByCode(countryCode, stateCode, cityCode);
+      if (city) {
+      setCityName(city.name);}
+    }
+  }, [countryCode, stateCode, cityCode]);
+
 
   return (
     <div className='AddCategoryDetails'>
