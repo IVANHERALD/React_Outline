@@ -68,11 +68,10 @@ function AddCategoryDetails() {
   const [price,setPrice]=useState('')
   const [countryCode, setcountryCode] = React.useState([]);
   const [stateCode, setstateCode] = React.useState([]);
-  const [cityCode, setCityCode] = React.useState([]);
+  
   const [countryName, setCountryName] = useState('');
   const [stateName, setStateName] = useState('');
-  const [cityName, setCityName] = useState('');
-
+  const [cityName, setCityName] = React.useState('');
  
   const {currentUser}=useAuthValue();
   const {newPhotos}=useAuthValue();
@@ -112,7 +111,7 @@ function AddCategoryDetails() {
   useEffect(() => { }, [values]);
 
   const handleClick=()=>{
-    console.log(category,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityCode, currentUser.displayName,currentUser.email,countryName,stateName,cityName);
+    console.log(category,brandName,adTitle,description,price,newPhotos,countryCode,stateCode,cityName, currentUser.displayName,currentUser.email,countryName,stateName,cityName);
     const productId = push(ref(db, 'product')).key;
     const productref=ref(db,'product')
     const productData=[{
@@ -121,7 +120,7 @@ function AddCategoryDetails() {
       adTitle,
       description,
       price,
-      newPhotos,countryCode,stateCode,cityCode,
+      newPhotos,countryCode,stateCode,cityName,
       displayName:currentUser.displayName,
       email:currentUser.email
     }];
@@ -146,30 +145,36 @@ function AddCategoryDetails() {
   //   console.log(City.getCitiesOfState(countryCode,stateCode))
   // }, [stateCode]);
   useEffect(() => {
+    console.log("helllo");
     if (countryCode) {
       const country = Country.getCountryByCode(countryCode);
       if (country) {
-      setCountryName(country.name);
-    }}
+        console.log(country.name);
+        setCountryName(country.name);
+    }
+  }
   }, [countryCode]);
 
   useEffect(() => {
-    if (countryCode && stateCode) {
-      const state = State.getStateByCode(countryCode, stateCode);
-      if (state) {
-        setStateName(state.name);
+    console.log("mee");
+    if (stateCode) {
+      const state = State.getStateByCodeAndCountry(stateCode,countryCode );
       
+    if (state) {
+      console.log(state.name);
       setStateName(state.name);
-    }}
-  }, [countryCode, stateCode]);
-
-  useEffect(() => {
-    if (countryCode && stateCode && cityCode) {
-      const city = City.getCityByCode(countryCode, stateCode, cityCode);
-      if (city) {
-      setCityName(city.name);}
     }
-  }, [countryCode, stateCode, cityCode]);
+  }
+  }, [stateCode]);
+
+  // useEffect(() => {
+  //   if (countryCode && stateCode && cityCode) {
+  //     const city = City.getCityByCode(countryCode, stateCode, cityCode);
+  //     console.log(cityCode);
+  //     // if (city) {
+  //     // setCityName(city.name);}
+  //   }
+  // }, [countryCode, stateCode, cityCode]);
 
 
   return (
@@ -252,8 +257,8 @@ function AddCategoryDetails() {
           </Select>
 
           <Select label="City"
-                value={cityCode}
-                onChange={(e)=> {setCityCode(e.target.value) }}
+                value={cityName}
+                onChange={(e)=> {setCityName(e.target.value) }}
                 MenuProps={MenuProps}>
                 {City.getCitiesOfState(countryCode,stateCode).map(({name})=> (
                   <MenuItem key={name} value={name}> {name} </MenuItem>
