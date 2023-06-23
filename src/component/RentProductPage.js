@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { db } from './Firebase';
 import { onValue, ref } from 'firebase/database';
-import SimpleImageSlider from 'react-simple-image-slider';
 import { useParams } from 'react-router';
-
+import ReactImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const RentProductPage = () => {
   const { productId } = useParams();
@@ -19,33 +19,24 @@ const RentProductPage = () => {
   }, [productId]);
 
   useEffect(() => {
-    console.log(sliderImages)
-  }, [sliderImages]);
-
-  useEffect(() => {
     if (product && product[0].newPhotos) {
       const images = product[0].newPhotos.map((image) => ({
-        url: image
+        original: image.url,
+        thumbnail: image.url,
       }));
       setSliderImages(images);
     }
   }, [product]);
 
   return (
-    
+    <div><br/>
+      
       <div>
-        <SimpleImageSlider images={sliderImages} width={500} height={500} />
-        <hr />
-          <div>
-            <h3>Price:</h3>
-            {product && <p>{product[0].price}</p>}
-          </div>
-          {/* <div>
-            <h3>Other Details:</h3>
-            {product && <p>{product.otherDetails}</p>}
-          </div> */}
-          </div>
-       
+        <h3>Price:</h3>
+        {product && <p>{product[0].price}</p>}
+        <ReactImageGallery items={sliderImages} />
+      </div>
+    </div>
   );
 };
 
