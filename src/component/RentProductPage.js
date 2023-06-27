@@ -4,6 +4,8 @@ import { onValue, ref } from 'firebase/database';
 import { useParams } from 'react-router';
 import ReactImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import { Button, Divider } from '@mui/material';
+
 import { Height } from '@mui/icons-material';
 import './Styles/RentProductPage.css'
 
@@ -25,39 +27,51 @@ const RentProductPage = () => {
       const images = product[0].newPhotos.map((image) => ({
         original: image,
         thumbnail: image,
+        originalHeight: 300,
+        originalWidth: 800,
+        thumbnailHeight: 80,
+        thumbnailWidth: 100,
       }));
       setSliderImages(images);
     }
   }, [product]);
+  
 
   return (
-    <div className='container'><br/>
+    <div className='container'>
       
-      <div className='left-content'>
         <div className='img' >
           
-        <ReactImageGallery items={sliderImages} /> 
+        <ReactImageGallery items={sliderImages} itemClass="custom"/> 
+        
         </div>
-        <div className='Details'>
+       <div className='Details'>
           <b>Details</b>
-          <h3>Brand:</h3>
+          <h3>Brand:</h3> 
         {product && <p>{product[0].brandName}</p>}
-        <hr/>
+        <Divider variant="middle" sx={{borderBottom:'2px solid black'}} />
+        
         Description<br/>
         {product && <p>{product[0].description}</p>}
-
         </div>
-        <div className='right-content'>
-        <h3>Price:</h3>
-        {product && <p>{product[0].price}</p>}</div>
 
-        <div>
+        
+        <div className='Price'>
+        <h3>Price:</h3>
+        {product && <p>{product[0].price}</p>}
+        </div>
+
+        <div className='posted'>
           Posted in<br/>
+          {product && <span>{product[0].cityName}</span>}, {product && <span>{product[0].stateName}</span>},{product && <span>{product[0].countryName}</span>}
           
         </div>
+        <div>
+          <Button variant='outlined'>RENT PRODUCT</Button>
+          </div>
          
       </div>
-    </div>
+  
   );
 };
 

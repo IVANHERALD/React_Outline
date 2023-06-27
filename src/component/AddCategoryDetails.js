@@ -145,7 +145,6 @@ function AddCategoryDetails() {
   //   console.log(City.getCitiesOfState(countryCode,stateCode))
   // }, [stateCode]);
   useEffect(() => {
-    console.log("helllo");
     if (countryCode) {
       const country = Country.getCountryByCode(countryCode);
       if (country) {
@@ -156,7 +155,6 @@ function AddCategoryDetails() {
   }, [countryCode]);
 
   useEffect(() => {
-    console.log("mee");
     if (stateCode) {
       const state = State.getStateByCodeAndCountry(stateCode,countryCode );
       

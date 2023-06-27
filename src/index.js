@@ -13,13 +13,14 @@ import PhotoUploadForm from './component/UploadPhoto';
 import Profile from './component/Profile';
 import BuyCatergory from './component/BuyCategory';
 import RentProductPage from './component/RentProductPage';
+import RentNow from './component/RentNow';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <GoogleOAuthProvider clientId='761985950049-qkpo9genj5hql966dk2dn7patviibb5d.apps.googleusercontent.com'><App/></GoogleOAuthProvider>
+      <GoogleOAuthProvider clientId='761985950049-qkpo9genj5hql966dk2dn7patviibb5d.apps.googleusercontent.com'><RentNow/></GoogleOAuthProvider>
     </Router>
   </React.StrictMode>
 );
