@@ -1,0 +1,68 @@
+.buyCategory {
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+  }
+  
+  .leftcolumn {
+    background-color: #E4F0F7;
+    width: 20%;
+    height:100vh;
+  }
+  
+  .prodDetailsCatgeory {
+    
+    flex: 1; /* Allow the element to grow and take remaining space */
+  }
+
+  .image-container{
+    display: flex; /* Use flexbox to create a row layout */
+    flex-wrap: wrap; /* Wrap the images to the next line if they exceed the container width */
+    justify-content: flex-start; 
+}
+.display-buy{
+    border: 10px;
+    background-color: whitesmoke;
+    width: 320px;
+    height: 250px;
+    margin: 10px;
+}
+.image{
+    width: 300px;
+    height: 220px;
+    align-items: center;
+    align-content: center;
+    margin-top: auto;
+    padding-top: 10px;
+}
+.otherDetails1,.otherDetails2{
+  
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 10px;
+  margin-left: 20px;
+  
+}
+.otherDetails1{
+  width:600px;
+}
+.otherDetails2{
+  width: 200px;
+}
+
+.displayDetails{
+  display: flex;
+  border: 10px;
+  margin: 10px;
+  background-color:#E4F0F7 ;
+  width:100%
+}
+.input-containers{
+   margin-top: 50px;
+  
+}
+
+.input-containers2{
+  margin-top:70px;
+  
+}

@@ -115,6 +115,7 @@ function AddCategoryDetails() {
     const productId = push(ref(db, 'product')).key;
     const productref=ref(db,'product')
     const productData=[{
+      productId,
       category,
       brandName,
       adTitle,

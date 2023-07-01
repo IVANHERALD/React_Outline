@@ -15,6 +15,7 @@ import AddCategoryDetails from './component/AddCategoryDetails'
 import CategoryPage from './component/CategoryPage';
 import RentProductPage from './component/RentProductPage';
 import RentNow from './component/RentNow';
+import BuyCatergory from './component/BuyCategory';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -43,6 +44,7 @@ function App() {
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/RentProductPage/:productId" element={<RentProductPage/>}/>
           <Route path="/RentNow" element={<RentNow/>}/>
+          <Route path="/BuyCategory/:passCategory" element={<BuyCatergory/>}/>
 
          </Routes>
          </AuthProvider>

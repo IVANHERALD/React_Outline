@@ -18,9 +18,9 @@ function Profile() {
 
  //const prodRef=rootRef.child('product');
 
-  const handleClick = () => {
-    history('/');
-  }
+ const handleClick = (passCategory) => {
+  history('/BuyCategory/' + passCategory);
+}
   const AddIconfunction = () => {
     history('/RentCatergory');
   }
@@ -42,7 +42,7 @@ function Profile() {
           <Grid item md={4}>
 
             <div className='Category-1'>
-              <CameraAltIcon sx={{ fontSize: 80 }} onClick={handleClick} />
+              <CameraAltIcon sx={{ fontSize: 80 }} onClick={() => { handleClick('Camera') }} />
             </div>
 
           </Grid>
