@@ -14,6 +14,7 @@ import RentCatergory from './component/RentCatergory';
 import AddCategoryDetails from './component/AddCategoryDetails'
 import CategoryPage from './component/CategoryPage';
 import RentProductPage from './component/RentProductPage';
+import RentNow from './component/RentNow';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
@@ -41,6 +42,7 @@ function App() {
           <Route path="/AddCategoryDetails/:category" element={<AddCategoryDetails/>}/>
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/RentProductPage/:productId" element={<RentProductPage/>}/>
+          <Route path="/RentNow" element={<RentNow/>}/>
 
          </Routes>
          </AuthProvider>

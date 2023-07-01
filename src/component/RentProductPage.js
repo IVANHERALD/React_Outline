@@ -5,11 +5,15 @@ import { useParams } from 'react-router';
 import ReactImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { Button, Divider } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
 import { Height } from '@mui/icons-material';
 import './Styles/RentProductPage.css'
 
 const RentProductPage = () => {
+  const history=useNavigate();
+  const payment=()=>{
+    history('/RentNow')
+  }
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [sliderImages, setSliderImages] = useState([]);
@@ -67,7 +71,7 @@ const RentProductPage = () => {
           
         </div>
         <div>
-          <Button variant='outlined'>RENT PRODUCT</Button>
+          <Button variant='outlined' onClick={payment}>RENT PRODUCT</Button>
           </div>
          
       </div>
