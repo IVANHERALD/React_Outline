@@ -8,8 +8,13 @@ import ChairIcon from '@mui/icons-material/Chair';
 import { FaMobile, FaTools } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
-import { Grid, Button } from '@mui/material';
+import { Grid, Button,Typography } from '@mui/material';
 import CategoryPage from './CategoryPage';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import TvIcon from '@mui/icons-material/Tv';
 
 
 function Profile() {
@@ -35,28 +40,53 @@ function Profile() {
         <h2>Categories</h2></div><br /><br /><br />
 
       <div className='Categories'>
-        <Grid container spacing={5} direction="row"
+        <Grid container spacing={1} direction="row"
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item md={4}>
+          <Grid item md={1}>
 
-            <div className='Category-1'>
+            <div className='Category'>
               <CameraAltIcon sx={{ fontSize: 80 }} onClick={() => { handleClick('Camera') }} />
             </div>
 
           </Grid>
 
-          <Grid item md={4}>
+          <Grid item md={1}>
 
-            <div className='Category-2'>
-              <ChairIcon sx={{ fontSize: 80 }} />
+            <div className='Category'>
+              <ChairIcon sx={{ fontSize: 80 }} onClick={() => { handleClick('Furniture') }}/>
             </div>
 
           </Grid>
-          <Grid item md={4}>
-            <div className='Category-3'>
+          <Grid item md={1}>
+            <div className='Category'>
               <FaTools style={{ fontSize: '65px' }} />
+            </div>
+          </Grid>
+          <Grid item md={1}>
+            <div className='Category'>
+              <PhoneIphoneIcon style={{ fontSize: '65px' }} onClick={() => { handleClick('Mobiles') }}/>
+              </div>
+        </Grid>
+              <Grid item md={1}>
+            <div className='Category'>
+              <Typography style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              onClick={() => { handleClick('BSH') }}>
+              <SportsCricketIcon style={{ fontSize: '40px' }} />
+              <AutoStoriesIcon style={{fontSize:'40px'}}/>
+
+              </Typography>
+              </div>
+              </Grid>
+              <Grid item md={1}>
+            <div className='Category'>
+              <SportsEsportsIcon style={{ fontSize: '65px' }}  onClick={() => { handleClick('Gaming')}}/>
+            </div>
+          </Grid>
+          <Grid item md={1}>
+            <div className='Category'>
+              <TvIcon style={{ fontSize: '65px' }}  onClick={() => { handleClick('Tv') }}/>
             </div>
           </Grid>
         </Grid>

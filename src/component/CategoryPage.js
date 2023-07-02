@@ -38,7 +38,7 @@ function CategoryPage() {
        <img className='image' src={item[0].newPhotos[0]} onClick={()=>handleclick1(productKeys[index])}></img>
         <br></br>
       <b className='price'> ₹ {item[0].price}</b> <br/>
-        {item[0].description}
+        {item[0].adTitle}
         
 
     </div>

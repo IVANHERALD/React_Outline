@@ -50,12 +50,14 @@ const RentProductPage = () => {
         
         </div>
        <div className='Details'>
-          <b>Details</b>
-          <h3>Brand:</h3> 
-        {product && <p>{product[0].brandName}</p>}
+          <b>Details</b><br/>
+          {product && product[0].brandName && (
+          <>
+            <h3>Brand:</h3>
+            <p>{product[0].brandName}</p>
         <Divider variant="middle" sx={{borderBottom:'2px solid black'}} />
-        
-        Description<br/>
+        </>)}
+       <b>Description</b> <br/><br/>
         {product && <p>{product[0].description}</p>}
         </div>
 

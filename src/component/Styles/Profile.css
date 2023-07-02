@@ -11,12 +11,13 @@
     color: white;
 
 }
-.Categories{
+.Categories>div{
     display: flex;
+    
 
     height: 70px;
 }
-.Category-1{
+.Category{
     
     border-radius: 45px;
     background-color: rgb(242, 235, 235);
@@ -25,24 +26,8 @@
     width: 90px;
 
 }
-.Category-2{
-    border-radius: 45px;
-    background-color:rgb(242, 235, 235);
-    height: 80px;
-    font-size: large;
-    width: 90px;
 
-}
-.Category-3{
-    border-radius: 45px;
-    background-color:rgb(242, 235, 235);
-    height: 80px;
-    font-size: large;
-    width: 90px;
-    align-items: center;
-    margin-top: auto;
 
-}
 .ShoppingCart{
     justify-content: left;
     position: absolute;
