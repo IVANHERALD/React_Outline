@@ -1,61 +1,45 @@
 .app {
- display: flex;
- background-image: url("https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
- background-size: cover;
- background-position: center;
- background-repeat: no-repeat;
+  display: flex;
+  background-image: url("https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  width:100%;
+  height:920px;
+ }
+ .Input-container-main{
+   background-color: rgb(189, 215, 238,0.7);
+   opacity: 10;
+   display:flex ;
+   margin-top: 90px;
+   margin-left: 250px;
+   width:1300px;
+   height:700px;
+   gap: 0px;
+   
+ }
+ .Input-container-login{
+   background-color:white;
+  
+   margin-top: 75px;
+   margin-left: 340px;
+   width:500px;
+   height:530px;
+   padding-top: 60px;
  
- width:100%;
- height:745px;
-}
-.Input-container-main{
-  background-color: rgb(189, 215, 238,0.7);
-  opacity: 10;
-  display:flex ;
-  margin-top: 10px;
-  margin-left: 100px;
-  width:1300px;
-  height:700px;
-  gap: 0px;
-  
-}
-.Input-container-login{
-  background-color:white;
-  
-  margin-top: 75px;
-  margin-left: 150px;
-  width:500px;
-  height:530px;
-  padding-top: 60px;
-
-  border-radius: 25px;}
-
-.Input-container-register{
-  background-color:white;
-  z-index: 100;
-  margin-top: 75px;
-  margin-left: 150px;
-  width:500px;
-  height:530px;
-  padding-top: 60px;
-  border-radius: 25px;
-
-}
-
-.Input-container-image
-{
-  background-color: white;
-  margin-top: 75px;
-  width:500px;
-  height:530px;
-  border-radius: 25px;
-
-}
-
-.image{
-  height:590px;
-  border-radius: 25px;
-  width: 500px;
-
-}
-
+   border-radius: 25px;}
+ 
+ .Input-container-register{
+   background-color:white;
+   z-index: 100;
+   margin-top: 75px;
+   margin-left: 340px;
+   width:500px;
+   height:530px;
+   padding-top: 60px;
+   border-radius: 25px;
+ 
+ }
+ 
+ 

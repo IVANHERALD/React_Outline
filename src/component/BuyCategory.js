@@ -1,9 +1,11 @@
 import { React, useEffect, useState } from 'react'
-import { Slide, Slider } from '@mui/material'
+import { Divider, Slide, Slider,Accordion,AccordionSummary,Typography,AccordionDetails } from '@mui/material'
 import '../component/Styles/BuyCategory.css';
 import { ref, onValue, query, equalTo, orderByChild, endAt, startAt } from 'firebase/database';
 import { db } from './Firebase'
 import { useParams,useNavigate } from 'react-router-dom';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 function BuyCatergory() {
@@ -66,7 +68,19 @@ function BuyCatergory() {
             Brand
         </div> */}
       <div className='leftcolumn'>
-        Filters
+        Filters<br/><Divider/>{passCategory}<Divider/><b>PRICE</b><br/><Slider min={0} max={30000} sx={{width:'200px'}}/><Divider/>
+
+        <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+      
+        >
+          <Typography>BRAND</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          
+        </AccordionDetails>
+      </Accordion>
       </div>
       <div className='prodDetailsCatgeory'>
         <div className='prodDetails'>

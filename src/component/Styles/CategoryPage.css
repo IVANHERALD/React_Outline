@@ -3,6 +3,7 @@
     flex-wrap: wrap; /* Wrap the images to the next line if they exceed the container width */
     justify-content: flex-start; 
     
+    
 }
 .display-buy{
     border: 10px;

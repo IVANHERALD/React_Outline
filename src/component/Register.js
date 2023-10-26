@@ -71,9 +71,7 @@ function Register() {
         </span>
           </div>
 
-        <div className="Input-container-image">
-        <img src={login_image}  className='image'alt="register_image"/>
-        </div>
+        
       </div>
 
     </div>

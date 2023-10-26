@@ -79,9 +79,7 @@ const login = e => {
           <Button variant="contained" onClick={login}>Login</Button> &nbsp;&nbsp;&nbsp;
           <Button variant="contained" onClick={handleClick}>Sign up</Button>
         </div>   
-        <div className="Input-container-image">
-        <img src={login_image}  alt="login_image" className="image"/>
-        </div>
+        
       </div>
     </div>
 
